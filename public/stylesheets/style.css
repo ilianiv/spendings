@@ -6,3 +6,12 @@ body {
 a {
   color: #00B7FF;
 }
+
+.menu {
+  padding: 0;
+}
+
+.menu li {
+  display: inline;
+  margin-right: 20px;
+}
