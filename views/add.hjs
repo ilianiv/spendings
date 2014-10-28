@@ -1,0 +1,21 @@
+{{<layout}}
+	{{$content}}
+	    <h1>{{ title }}</h1>
+	    <p>Welcome to {{ title }}</p>
+	    <form method="post">
+	    	<table>
+	    		{{#fields}}
+	    		<tr>
+	    			<td>
+	    				<label>{{field}}:</label>
+	    			</td>
+	    			<td>
+	    				<input type="text" name="{{field}}" />
+	    			</td>
+	    		</tr>
+	    		{{/fields}}
+	    	</table>
+	    	<input type="submit" id="submit" value="submit" />
+	    </form>
+  	{{/content}}
+{{/layout}}
