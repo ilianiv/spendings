@@ -1,35 +1,21 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+  , router = express.Router()
+  , SpendingsHandler = require('./spendings')
+  , contentHandler = new SpendingsHandler();
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', {
-    title : 'Spendings app',
-    partials : {
-      layout : 'layout'
-    }
-  });
-});
+router.get('/', contentHandler.displayHome);
 
 /* GET add spending page. */
-router.get('/add', function(req, res) {
-  res.render('add', {
-    title : 'Add new spending',
-    fields : [
-      {'field' : 'amount'},
-      {'field' : 'name'},
-      {'field' : 'date'}
-    ],
-    partials : {
-      layout : 'layout'
-    }
-  });
-});
+router.get('/add', contentHandler.displayAddNew);
 
 /* POST add spending page. */
-router.post('/add', function(req, res) { 
-  /* TO DO */
-  res.redirect('/add');
-});
+router.post('/add', contentHandler.handleAddNew);
+
+/* GET view spendings page. */
+router.get('/view/:id?', contentHandler.displayViewAll);
+
+/* POST remove spendings page. */
+router.post('/remove', contentHandler.handleRemove);
 
 module.exports = router;

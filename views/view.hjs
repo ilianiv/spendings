@@ -1,0 +1,25 @@
+{{<layout}}
+	{{$content}}
+	    <h1>{{ title }}</h1>
+        <table>
+            <tr>
+                <th>Amount</th>
+                <th>Name</th>
+                <th>Date</th>
+            </tr>
+            {{#spendings}}
+            <tr>
+                <td>{{ amount }}</td>
+                <td>{{ name }}</td>
+                <td>{{ date }}</td>
+                <td><a href="javascript:DoPost('/remove',{ id : '{{ _id }}'})">delete</a></td>
+            </tr>
+            {{/spendings}}
+            {{^spendings}}
+            <tr>
+                <td colspan="3">No spendings</td>
+            </tr>
+            {{/spendings}}
+        </table>
+  	{{/content}}
+{{/layout}}
