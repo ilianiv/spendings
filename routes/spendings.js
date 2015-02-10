@@ -36,7 +36,6 @@ function SpendingsHandler(){
     }
 
     this.handleAddNew = function (req, res) {
-
         // validation
         req.checkBody('amount', 'Invalid amount').notEmpty().isFloat();
         req.checkBody('name', 'Invalid spending name').notEmpty();

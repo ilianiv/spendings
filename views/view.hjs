@@ -1,25 +1,31 @@
 {{<layout}}
 	{{$content}}
 	    <h1>{{ title }}</h1>
-        <table>
-            <tr>
-                <th>Amount</th>
-                <th>Name</th>
-                <th>Date</th>
-            </tr>
-            {{#spendings}}
-            <tr>
-                <td>{{ amount }}</td>
-                <td>{{ name }}</td>
-                <td>{{ date }}</td>
-                <td><a href="javascript:DoPost('/remove',{ id : '{{ _id }}'})">delete</a></td>
-            </tr>
-            {{/spendings}}
-            {{^spendings}}
-            <tr>
-                <td colspan="3">No spendings</td>
-            </tr>
-            {{/spendings}}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Amount</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#spendings}}
+                <tr>
+                    <td>{{ amount }}</td>
+                    <td>{{ name }}</td>
+                    <td>{{ date }}</td>
+                    <td><button onclick="DoPost('/remove',{ id : '{{ _id }}'})" type="button" class="btn btn-xs btn-danger">Delete</button></td>
+                </tr>
+                {{/spendings}}
+
+                {{^spendings}}
+                <tr>
+                    <td colspan="3">No spendings</td>
+                </tr>
+                {{/spendings}}
+            </tbody>
         </table>
   	{{/content}}
 {{/layout}}

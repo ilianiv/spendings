@@ -3,19 +3,14 @@
 	    <h1>{{ title }}</h1>
 	    <p>Welcome to {{ title }}</p>
 	    <form method="post">
-	    	<table>
-	    		{{#fields}}
-	    		<tr>
-	    			<td>
-	    				<label>{{field}}:</label>
-	    			</td>
-	    			<td>
-	    				<input type="text" name="{{field}}" />
-	    			</td>
-	    		</tr>
-	    		{{/fields}}
-	    	</table>
-	    	<input type="submit" id="submit" value="submit" />
+	        {{#fields}}
+	        <div class="form-group">
+	            <label for="{{field}}">{{field}}</label>
+                <input type="text" class="form-control" id="{{field}}" placeholder="Enter {{field}}">
+	        </div>
+	        {{/fields}}
+
+	    	<button type="submit" class="btn btn-primary" id="submit">Submit</button>
 	    </form>
   	{{/content}}
 {{/layout}}
