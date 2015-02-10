@@ -37,6 +37,7 @@ function SpendingsHandler(){
 
     this.handleAddNew = function (req, res) {
         // validation
+        console.log(req.body);
         req.checkBody('amount', 'Invalid amount').notEmpty().isFloat();
         req.checkBody('name', 'Invalid spending name').notEmpty();
         req.checkBody('date', 'Invalid spending name').notEmpty().isDate();
