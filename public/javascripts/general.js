@@ -1,8 +1,12 @@
 function DoPost(page, vals){
-    //console.log(page + "|||" + vals);
-    if (vals === undefined)
-        vals = {};
-    $.post(page, vals, function(){
-        location.reload();
+    bootbox.confirm("Are you sure?", function(result) {
+        if (result){
+            //console.log(page + "|||" + vals);
+            if (vals === undefined)
+                vals = {};
+            $.post(page, vals, function(){
+                location.reload();
+            });
+        }
     });
 }

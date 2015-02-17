@@ -37,14 +37,13 @@ function SpendingsHandler(){
 
     this.handleAddNew = function (req, res) {
         // validation
-        console.log(req.body);
-        req.checkBody('amount', 'Invalid amount').notEmpty().isFloat();
-        req.checkBody('name', 'Invalid spending name').notEmpty();
-        req.checkBody('date', 'Invalid spending name').notEmpty().isDate();
+        req.checkBody('amount', 'Invalid amount').isFloat();
+        req.checkBody('name', 'Invalid name').notEmpty();
+        req.checkBody('date', 'Invalid date').isDate();
 
         var errors = req.validationErrors();
         if (errors) {
-            req.flash('There have been validation errors: ' + JSON.stringify(errors));
+            req.flash("There have been validation errors: " + errors.join(", "));
             res.redirect('/add');
             return;
         }
