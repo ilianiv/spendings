@@ -8,12 +8,29 @@ var bodyParser = require('body-parser');
 var monk = require('monk');
 var db = monk('localhost:27017/spendings');
 var expressValidator = require('express-validator');
-var passport = require('passport');
+var passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
 
 var routes = require('./routes');
 var errors = require('./routes/errors')
 
 var app = express();
+
+// PassportJS
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+        User.findOne({ username: username }, function (err, user) {
+            if (err) { return done(err); }
+            if (!user) {
+                return done(null, false, { message: 'Incorrect username.' });
+            }
+            if (!user.validPassword(password)) {
+                return done(null, false, { message: 'Incorrect password.' });
+            }
+            return done(null, user);
+        });
+    }
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,9 +43,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended : false
 }));
-app.use(expressValidator({
-    errorFormatter: function(param, msg, value) { return msg; }
-}));
+app.use(expressValidator(
+        {
+            errorFormatter: function(param, msg, value) { return msg; },
+            customValidators: {
+                minLength: function(param, num) {
+                    return param.length >= num;
+                },
+                maxLength: function(param, num) {
+                    return param.length <= num;
+                },
+                isEqual: function(param, str) {
+                    return param == str;
+                }
+            }
+        }
+));
 app.use(cookieParser());
 app.use(session({
     secret: 'spendings',
